@@ -1,0 +1,36 @@
+#include <DS3231.h>
+
+
+DS3231  rtc(SDA, SCL);
+
+void setup()
+{
+  
+  Serial.begin(115200);
+  
+  
+  
+  rtc.begin();
+  
+  
+  rtc.setDOW(WEDNESDAY);     
+  rtc.setTime(22,36,00);     
+  rtc.setDate(27,02, 2019);   
+}
+
+void loop()
+{
+  // Send Day-of-Week
+  Serial.print(rtc.getDOWStr());
+  Serial.print(" ");
+  
+  // Send date
+  Serial.print(rtc.getDateStr());
+  Serial.print(" -- ");
+
+  // Send time
+  Serial.println(rtc.getTimeStr());
+  
+  // Wait one second before repeating :)
+  delay (1000);
+}
